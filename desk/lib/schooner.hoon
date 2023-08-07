@@ -18,7 +18,7 @@
 ::
 +$  resource
   $%
-    [%application-javascript p=tape]            :: js
+    [%application-javascript p=@]               :: js
     [%application-json p=@]                     :: json
     [%application-pdf p=@]                      :: pdf
     [%application-rtf p=@]                      :: rtf
@@ -73,27 +73,27 @@
   ?-  -.resource
     ::
       %application-javascript
-    :_  `(as-octt:mimes:html p.resource)
+    :_  `(as-octs:mimes:html p.resource)
     :-  http-status
     (weld headers ['content-type'^'application/javascript']~)
     ::
       %application-json
-    :_  `(as-octt:mimes:html p.resource)
+    :_  `(as-octs:mimes:html p.resource)
     :-  http-status
     (weld headers ['content-type'^'application/json']~)
     ::
       %application-pdf
-    :_  `(as-octt:mimes:html p.resource)
+    :_  `(as-octs:mimes:html p.resource)
     :-  http-status
     (weld headers ['content-type'^'application/pdf']~)
     ::
       %application-rtf
-    :_  `(as-octt:mimes:html p.resource)
+    :_  `(as-octs:mimes:html p.resource)
     :-  http-status
     (weld headers ['content-type'^'application/rtf']~)
     ::
       %application-xml
-    :_  `(as-octt:mimes:html p.resource)
+    :_  `(as-octs:mimes:html p.resource)
     :-  http-status
     (weld headers ['content-type'^'application/xml']~)
     ::
@@ -127,7 +127,7 @@
     :-  http-status
     (weld headers ['content-type'^'audio/wav']~)
     ::
-      %audio-weba
+      %audio-webm
     :_  `(as-octs:mimes:html p.resource)
     :-  http-status
     (weld headers ['content-type'^'audio/webm']~)
@@ -288,10 +288,10 @@
   %+  give-simple-payload:app:server
     eyre-id
   ^-  simple-payload:http
-  :_  `(as-octt:mimes:html p.resource)
+  :_  `(as-octs:mimes:html +.resource)
   :-  http-status
   =/  a  (trip -.resource)
-  =/  b  (find "-" a)
+  =/  b  (need (find "-" a))
   =/  c  (crip (snap a b '/'))
   (weld headers ['content-type'^c]~)
 ::
