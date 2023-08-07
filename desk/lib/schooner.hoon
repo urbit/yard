@@ -1,6 +1,6 @@
   ::  /lib/schooner.hoon
 ::::  Dalten Collective, with modifications by ~hanfel-dovned & ~lagrev-nocfep
-::    Version ~2023.7.24
+::    Version ~2023.8.7
 ::
 ::  Schooner is a Hoon library intended to de-clutter raw HTTP handling
 ::  in Gall agents.
