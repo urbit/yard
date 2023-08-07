@@ -1,8 +1,6 @@
 #   `%yard`, A Developer Commons
 
-**WIP ~2023.8.7 pending some build issues before public announcement**
-
-`%yard` is a provisional desk to offer helpful utilities for Urbit-based app development.
+`%yard` is a provisional desk to offer helpful utilities for Urbit-based app development.  Please direct questions and feedback to @sigilante.
 
 As discussed in [UIP-0108](https://github.com/urbit/UIPs/blob/main/UIPS/UIP-0108.md), we are fielding this as a non-core desk before deciding whether and how to more closely integrate it to the standard Urbit distribution.
 
