@@ -15,3 +15,9 @@ At the current time, we'd like to see:
 - developer feedback on any of the tools included in this desk
 - suggestions on what else to consider including
 - unit tests that adequately vet the behavior of the included libraries and marks
+
+Among other contributors, `%yard` includes:
+
+- [`/lib/sequent`](https://github.com/jackfoxy/sequent) by ~nomryg-nilref
+- [`/lib/regex`](https://github.com/lynko/re.hoon) by ~macrep-racdec
+- [`/lib/manx-utils`](https://github.com/tinnus-napbus/manx-utils/) by ~tinnus-napbus
