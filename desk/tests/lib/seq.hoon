@@ -2448,4 +2448,53 @@
             `(list tape)`~["aa" "bb"]
             `(list @t)`~['a' 'b']
         ==
+++  test-shuffle-3
+  %+  expect-eq
+    !>  `(list @)`~[3 2 1]
+    !>  (shuffle `(list @)`~[1 2 3 4 5] 42)
+++  test-shuffle-5
+  %+  expect-eq
+    !>  `(list @)`~[2 3 5 4 1]
+    !>  (shuffle `(list @)`~[1 2 3 4 5] 42)
+++  test-shuffle-7
+  %+  expect-eq
+    !>  `(list @)`~[2 5 7 6 4 3 1]
+    !>  (shuffle `(list @)`~[1 2 3 4 5 6 7] 42)
+++  test-shuffle-20
+  %+  expect-eq
+    !>  `(list @)`~[11 18 17 14 9 3 13 8 4 7 10 5 6 2 20 16 15 12 19 1]
+    !>  (shuffle (gulf 1 20) 42)
+++  test-sample-5-4
+  %+  expect-eq
+    !>  `(list @)`~[2 3 5 4]
+    !>  (sample `(list @)`~[1 2 3 4 5] 4 42)
+++  test-sample-10-5
+  %+  expect-eq
+    !>  `(list @)`~[7 9 3 8 2]
+    !>  (sample (gulf 1 10) 5 42)
+++  test-draw
+  ;:  weld
+  %+  expect-eq
+    !>  23
+    !>  (draw (gulf 1 100) 42)
+  %+  expect-eq
+    !>  7
+    !>  (draw (gulf 1 10) 42)
+  %+  expect-eq
+    !>  2
+    !>  (draw (gulf 1 5) 42)
+  ==
+++  test-draw-n-with-replacement
+  ;:  weld
+  %+  expect-eq
+    !>  `(list @)`~[4 5 2 5 2]
+    !>  (draw-n-with-replacement (gulf 1 5) 5 42)
+  %+  expect-eq
+    !>  `(list @)`~[89 27 99 39 23]
+    !>  (draw-n-with-replacement (gulf 1 100) 5 42)
+  %+  expect-eq
+    !>  `(list @)`~[17 43 68 13 26 89 27 99 39 23]
+    !>  (draw-n-with-replacement (gulf 1 100) 10 42)
+  ==
 --
+

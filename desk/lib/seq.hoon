@@ -1832,4 +1832,88 @@
   ?~  b   ~|('lists of unequal length' !!)
   ?~  c   ~|('lists of unequal length' !!)
   $(a t.a, b t.b, c t.c, d [[i.a i.b i.c] d])
+::    +shuffle: (list T) -> (list T)
+::
+::  Reorder the elements of a list randomly using the Fisher-Yates algorithm.
+::    Examples
+::      > (shuffle `(list @)`~[1 2 3 4 5] eny)
+::      ~[3 1 5 2 4]
+::      > (shuffle `(list @)`~[1 2 3 4 5 6 7 8 9] eny)
+::      ~[5 2 9 1 8 4 3 7 6]
+::  Source
+++  shuffle
+  |*  [a=(list) eny=@uvJ]
+  =/  n  (lent a)
+  =/  i  0
+  =/  rng  ~(. og eny)
+  |-  ^-  (list _?>(?=(^ a) i.a))
+  ?:  =(n i)  a
+  =^  r  rng  (rads:rng n)
+  =/  i1  (snag i a)
+  =/  i2  (snag r a)
+  =.  a  (snap a i i2)
+  =.  a  (snap a r i1)
+  $(i +(i))
+::    +sample: (list T) -> (list T)
+::
+::  Select a random subset from a list.
+::    Examples
+::      > (sample `(list @)`~[1 2 3 4 5] 3 eny)
+::      ~[3 1 5]
+::      > (sample `(list @)`~[1 2 3 4 5] 3 eny)
+::      ~[2 4 5]
+::  Source
+++  sample
+  |*  [a=(list) n=@ eny=@uvJ]
+  ^-  (list _?>(?=(^ a) i.a))
+  =.  n  (min (lent a) n)
+  =/  b  (shuffle a eny)
+  (scag n b)
+::    +draw: (list T) -> T
+::
+::  Select a random element from a list.
+::    Examples
+::      > (draw `(list @)`~[1 2 3 4 5] eny)
+::      3
+::      > (draw `(list @)`~[1 2 3 4 5] eny)
+::      5
+::  Source
+++  draw
+  |*  [a=(list) eny=@uvJ]
+  ^-  _?>(?=(^ a) i.a)
+  =/  n  (lent a)
+  =/  rng  ~(. og eny)
+  =^  r  rng  (rads:rng n)
+  (snag r a)
+::    +draw-n: (list T) -> (list T)
+::
+::  Select a random subset from a list.
+::    Examples
+::      > (draw-n `(list @)`~[1 2 3 4 5] 3 eny)
+::      ~[3 1 5]
+::      > (draw-n `(list @)`~[1 2 3 4 5] 3 eny)
+::      ~[2 4 5]
+::  Source
+++  draw-n  sample
+::    +draw-with-replacement: (list T) -> (list T)
+::
+::  Select random elements from a list, with replacement.
+::    Examples
+::      > (draw-with-replacement `(list @)`~[1 2 3 4 5] 3 eny)
+::      ~[3 1 5]
+::      > (draw-with-replacement `(list @)`~[1 2 3 4 5] 3 eny)
+::      ~[2 4 2]
+::  Source
+++  draw-n-with-replacement
+  |*  [a=(list) n=@ eny=@uvJ]
+  ^-  (list _?>(?=(^ a) i.a))
+  =/  i  0
+  =|  b=(list _?>(?=(^ a) i.a))
+  =/  rng  ~(. og eny)
+  |-
+  ?:  =(n i)  b
+  =^  r  rng  (rads:rng (lent a))
+  =/  bb  (snag r a)
+  $(i +(i), b [bb b])
 --
+
