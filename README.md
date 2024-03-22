@@ -21,3 +21,5 @@ Among other contributors, `%yard` includes:
 - [`/lib/sequent`](https://github.com/jackfoxy/sequent) by ~nomryg-nilref
 - [`/lib/regex`](https://github.com/lynko/re.hoon) by ~macrep-racdec
 - [`/lib/manx-utils`](https://github.com/tinnus-napbus/manx-utils/) by ~tinnus-napbus
+- [`/lib/math`](https://github.com/sigilante/libmath) by ~lagrev-nocfep
+
