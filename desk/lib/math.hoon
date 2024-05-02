@@ -275,53 +275,53 @@
   ::      %.n
   ::  Source
   ++  neq  |=([a=@rs b=@rs] ^-(? !(equ:^rs a b)))
-  ::    +isclose:  [@rs @rs] -> ?
+  ::    +is-close:  [@rs @rs] -> ?
   ::
   ::  Returns the comparison of two floating-point atoms, within a relative
   ::  tolerance (provided by the +rs door).
   ::    Examples
-  ::      > (isclose .1 .2)
+  ::      > (is-close .1 .2)
   ::      %.n
-  ::      > (isclose .1 .1000001)
+  ::      > (is-close .1 .1000001)
   ::      %.y
-  ::      > (~(isclose rs [%z .1e-8]) .1 .1000001)
+  ::      > (~(is-close rs [%z .1e-8]) .1 .1000001)
   ::      %.n
   ::  Source
-  ++  isclose
+  ++  is-close
     |=  [p=@rs r=@rs]
     (lth (abs (sub p r)) rtol)
-  ::    +allclose:  [@rs (list @rs)] -> ?
+  ::    +all-close:  [@rs (list @rs)] -> ?
   ::
   ::  Returns the comparison of a floating-point atom to a list of floating-
   ::  point atoms, within a relative tolerance (provided by the +rs door).
   ::    Examples
-  ::      > (allclose .1 ~[.1 .2])
+  ::      > (all-close .1 ~[.1 .2])
   ::      %.n
-  ::      > (allclose .1 ~[.1 .1.000001])
+  ::      > (all-close .1 ~[.1 .1.000001])
   ::      %.y
-  ::      > (~(allclose rs [%z .1e-8]) .1 ~[.1 .1000001])
+  ::      > (~(all-close rs [%z .1e-8]) .1 ~[.1 .1000001])
   ::      %.n
   ::  Source
-  ++  allclose
+  ++  all-close
     |=  [p=@rs q=(list @rs)]
     =/  i  0
     =/  n  (lent q)
     |-  ^-  ?
     ?:  =(n i)
       %.y
-    ?.  (isclose p (snag i q))
+    ?.  (is-close p (snag i q))
       %.n
     $(i +(i))
-  ::    +isint:  @rs -> ?
+  ::    +is-int:  @rs -> ?
   ::
   ::  Returns whether a floating-point value is an integer (no fractional part).
   ::    Examples
-  ::      > (isint .1)
+  ::      > (is-int .1)
   ::      %.y
-  ::      > (isint .1.1)
+  ::      > (is-int .1.1)
   ::      %.n
   ::  Source
-  ++  isint
+  ++  is-int
     |=  x=@rs  ^-  ?
     (equ x (san (need (toi x))))
   ::
@@ -431,10 +431,10 @@
     |=  x=@rs  ^-  @rs
     ?>  (gte x .0)
     =/  t=@rs  .1
-    ?:  (isclose x .0)
+    ?:  (is-close x .0)
       t
     |-  ^-  @rs
-    ?:  (isclose x .1)
+    ?:  (is-close x .1)
       t
     $(x (sub x .1), t (mul t x))
   ::    +abs:  @rs -> @rs
@@ -577,7 +577,7 @@
   ++  pow-n
     |=  [x=@rs n=@rs]  ^-  @rs
     ?:  =(n .0)  .1
-    ?>  &((gth n .0) (isint n))
+    ?>  &((gth n .0) (is-int n))
     =/  p  x
     |-  ^-  @rs
     ?:  (lth n .2)
@@ -1076,53 +1076,53 @@
   ::      %.n
   ::  Source
   ++  neq  |=([a=@rd b=@rd] ^-(? !(equ:^rd a b)))
-  ::    +isclose:  [@rd @rd] -> ?
+  ::    +is-close:  [@rd @rd] -> ?
   ::
   ::  Returns the comparison of two floating-point atoms, within a relative
   ::  tolerance (provided by the +rd door).
   ::    Examples
-  ::      > (isclose .~1 .~2)
+  ::      > (is-close .~1 .~2)
   ::      %.n
-  ::      > (isclose .~1 .~1.0000001)
+  ::      > (is-close .~1 .~1.0000001)
   ::      %.n
-  ::      > (~(isclose rd [%z .~1e-3]) .~1 .~1.0000001)
+  ::      > (~(is-close rd [%z .~1e-3]) .~1 .~1.0000001)
   ::      %.y
   ::  Source
-  ++  isclose
+  ++  is-close
     |=  [p=@rd r=@rd]
     (lth (abs (sub p r)) rtol)
-  ::    +allclose:  [@rd (list @rd)] -> ?
+  ::    +all-close:  [@rd (list @rd)] -> ?
   ::
   ::  Returns the comparison of a floating-point atom to a list of floating-
   ::  point atoms, within a relative tolerance (provided by the +rd door).
   ::    Examples
-  ::      > (allclose .~1 ~[.~1 .~2])
+  ::      > (all-close .~1 ~[.~1 .~2])
   ::      %.n
-  ::      > (allclose .~1 ~[.~1 .~1.0000001])
+  ::      > (all-close .~1 ~[.~1 .~1.0000001])
   ::      %.n
-  ::      > (~(allclose rd [%z .~1e-3]) .~1 ~[.~1 .~1.0000001])
+  ::      > (~(all-close rd [%z .~1e-3]) .~1 ~[.~1 .~1.0000001])
   ::      %.y
   ::  Source
-  ++  allclose
+  ++  all-close
     |=  [p=@rd q=(list @rd)]
     =/  i  0
     =/  n  (lent q)
     |-  ^-  ?
     ?:  =(n i)
       %.y
-    ?.  (isclose p (snag i q))
+    ?.  (is-close p (snag i q))
       %.n
     $(i +(i))
-  ::    +isint:  @rd -> ?
+  ::    +is-int:  @rd -> ?
   ::
   ::  Returns whether a floating-point value is an integer (no fractional part).
   ::    Examples
-  ::      > (isint .~1)
+  ::      > (is-int .~1)
   ::      %.y
-  ::      > (isint .~1.1)
+  ::      > (is-int .~1.1)
   ::      %.n
   ::  Source
-  ++  isint
+  ++  is-int
     |=  x=@rd  ^-  ?
     (equ x (san (need (toi x))))
   ::
@@ -1218,10 +1218,10 @@
     |=  x=@rd  ^-  @rd
     ?>  (gte x .~0)
     =/  t=@rd  .~1
-    ?:  (isclose x .~0)
+    ?:  (is-close x .~0)
       t
     |-  ^-  @rd
-    ?:  (isclose x .~1)
+    ?:  (is-close x .~1)
       t
     $(x (sub x .~1), t (mul t x))
   ::    +abs:  @rd -> @rd
@@ -1364,7 +1364,7 @@
   ++  pow-n
     |=  [x=@rd n=@rd]  ^-  @rd
     ?:  =(n .~0)  .~1
-    ?>  &((gth n .~0) (isint n))
+    ?>  &((gth n .~0) (is-int n))
     =/  p  x
     |-  ^-  @rd
     ?:  (lth n .~2)
@@ -1856,53 +1856,53 @@
   ::      %.n
   ::  Source
   ++  neq  |=([a=@rh b=@rh] ^-(? !(equ:^rh a b)))
-  ::    +isclose:  [@rh @rh] -> ?
+  ::    +is-close:  [@rh @rh] -> ?
   ::
   ::  Returns the comparison of two floating-point atoms, within a relative
   ::  tolerance (provided by the +rh door).
   ::    Examples
-  ::      > (isclose .~~1 .~~2)
+  ::      > (is-close .~~1 .~~2)
   ::      %.n
-  ::      > (isclose .~~1 .~~1.0000001)
+  ::      > (is-close .~~1 .~~1.0000001)
   ::      %.n
-  ::      > (~(isclose rh [%z .~~1e-3]) .~~1 .~~1.0001)
+  ::      > (~(is-close rh [%z .~~1e-3]) .~~1 .~~1.0001)
   ::      %.y
   ::  Source
-  ++  isclose
+  ++  is-close
     |=  [p=@rh r=@rh]
     (lth (abs (sub p r)) rtol)
-  ::    +allclose:  [@rh (list @rh)] -> ?
+  ::    +all-close:  [@rh (list @rh)] -> ?
   ::
   ::  Returns the comparison of a floating-point atom to a list of floating-
   ::  point atoms, within a relative tolerance (provided by the +rh door).
   ::    Examples
-  ::      > (allclose .~~1 ~[.~~1 .~~2])
+  ::      > (all-close .~~1 ~[.~~1 .~~2])
   ::      %.n
-  ::      > (allclose .~~1 ~[.~~1 .~~1.0000001])
+  ::      > (all-close .~~1 ~[.~~1 .~~1.0000001])
   ::      %.n
-  ::      > (~(allclose rh [%z .~~1e-3]) .~~1 ~[.~~1 .~~1.0001])
+  ::      > (~(all-close rh [%z .~~1e-3]) .~~1 ~[.~~1 .~~1.0001])
   ::      %.y
   ::  Source
-  ++  allclose
+  ++  all-close
     |=  [p=@rh q=(list @rh)]
     =/  i  0
     =/  n  (lent q)
     |-  ^-  ?
     ?:  =(n i)
       %.y
-    ?.  (isclose p (snag i q))
+    ?.  (is-close p (snag i q))
       %.n
     $(i +(i))
-  ::    +isint:  @rh -> ?
+  ::    +is-int:  @rh -> ?
   ::
   ::  Returns whether a floating-point value is an integer (no fractional part).
   ::    Examples
-  ::      > (isint .~~1)
+  ::      > (is-int .~~1)
   ::      %.y
-  ::      > (isint .~~1.1)
+  ::      > (is-int .~~1.1)
   ::      %.n
   ::  Source
-  ++  isint
+  ++  is-int
     |=  x=@rh  ^-  ?
     (equ x (san (need (toi x))))
   ::
@@ -1996,10 +1996,10 @@
     |=  x=@rh  ^-  @rh
     ?>  (gte x .~~0)
     =/  t=@rh  .~~1
-    ?:  (isclose x .~~0)
+    ?:  (is-close x .~~0)
       t
     |-  ^-  @rh
-    ?:  (isclose x .~~1)
+    ?:  (is-close x .~~1)
       t
     $(x (sub x .~~1), t (mul t x))
   ::    +abs:  @rh -> @rh
@@ -2142,7 +2142,7 @@
   ++  pow-n
     |=  [x=@rh n=@rh]  ^-  @rh
     ?:  =(n .~~0)  .~~1
-    ?>  &((gth n .~~0) (isint n))
+    ?>  &((gth n .~~0) (is-int n))
     =/  p  x
     |-  ^-  @rh
     ?:  (lth n .~~2)
@@ -2178,6 +2178,24 @@
     =/  term3  (mul (add z .~~1) (add z .~~1))
     =/  term  (mul term1 (pow-n (div term2 term3) i))
     $(i (add i .~~1), p (add p term), po p)
+  ::    +log-10:  @rh -> @rh
+  ::
+  ::  Returns the base-10 logarithm of a floating-point atom.
+  ::    Examples
+  ::      TODO
+  ::  Source
+  ++  log-10
+    |=  z=@rh  ^-  @rh
+    (div (log z) log10)
+  ::    +log-2:  @rh -> @rh
+  ::
+  ::  Returns the base-2 logarithm of a floating-point atom.
+  ::    Examples
+  ::      TODO
+  ::  Source
+  ++  log-2
+    |=  z=@rh  ^-  @rh
+    (div (log z) log2)
   ::    +pow:  [@rh @rh] -> @rh
   ::
   ::  Returns the power of a floating-point atom to a floating-point exponent.
@@ -2533,55 +2551,55 @@
   ::      %.n
   ::  Source
   ++  neq  |=([a=@rq b=@rq] ^-(? !(equ:^rq a b)))
-  ::    +isclose:  [@rq @rq] -> ?
+  ::    +is-close:  [@rq @rq] -> ?
   ::
   ::  Returns the comparison of two floating-point atoms, within a relative
   ::  tolerance (provided by the +rq door).
   ::    Examples
-  ::      > (isclose .~~~1 .~~~2)
+  ::      > (is-close .~~~1 .~~~2)
   ::      %.n
-  ::      > (isclose .~~~1 .~~~1.0000001)
+  ::      > (is-close .~~~1 .~~~1.0000001)
   ::      %.n
-  ::      > (~(isclose rq [%z .~~~1e-3]) .~~~1 .~~~1.0001)
+  ::      > (~(is-close rq [%z .~~~1e-3]) .~~~1 .~~~1.0001)
   ::      %.y
-  ::      > (~(isclose rq [%z .~~~1e-30]) .~~~1 .~~~1.0001)
+  ::      > (~(is-close rq [%z .~~~1e-30]) .~~~1 .~~~1.0001)
   ::      %.n
   ::  Source
-  ++  isclose
+  ++  is-close
     |=  [p=@rq r=@rq]
     (lth (abs (sub p r)) rtol)
-  ::    +allclose:  [@rq (list @rq)] -> ?
+  ::    +all-close:  [@rq (list @rq)] -> ?
   ::
   ::  Returns the comparison of a floating-point atom to a list of floating-
   ::  point atoms, within a relative tolerance (provided by the +rq door).
   ::    Examples
-  ::      > (allclose .~~~1 ~[.~~~1 .~~~2])
+  ::      > (all-close .~~~1 ~[.~~~1 .~~~2])
   ::      %.n
-  ::      > (allclose .~~~1 ~[.~~~1 .~~~1.0000001])
+  ::      > (all-close .~~~1 ~[.~~~1 .~~~1.0000001])
   ::      %.n
-  ::      > (~(allclose rq [%z .~~~1e-3]) .~~~1 ~[.~~~1 .~~~1.0001])
+  ::      > (~(all-close rq [%z .~~~1e-3]) .~~~1 ~[.~~~1 .~~~1.0001])
   ::      %.y
   ::  Source
-  ++  allclose
+  ++  all-close
     |=  [p=@rq q=(list @rq)]
     =/  i  0
     =/  n  (lent q)
     |-  ^-  ?
     ?:  =(n i)
       %.y
-    ?.  (isclose p (snag i q))
+    ?.  (is-close p (snag i q))
       %.n
     $(i +(i))
-  ::    +isint:  @rq -> ?
+  ::    +is-int:  @rq -> ?
   ::
   ::  Returns whether a floating-point value is an integer (no fractional part).
   ::    Examples
-  ::      > (isint .~~~1)
+  ::      > (is-int .~~~1)
   ::      %.y
-  ::      > (isint .~~~1.1)
+  ::      > (is-int .~~~1.1)
   ::      %.n
   ::  Source
-  ++  isint
+  ++  is-int
     |=  x=@rq  ^-  ?
     (equ x (san (need (toi x))))
   ::
@@ -2675,10 +2693,10 @@
     |=  x=@rq  ^-  @rq
     ?>  (gte x .~~~0)
     =/  t=@rq  .~~~1
-    ?:  (isclose x .~~~0)
+    ?:  (is-close x .~~~0)
       t
     |-  ^-  @rq
-    ?:  (isclose x .~~~1)
+    ?:  (is-close x .~~~1)
       t
     $(x (sub x .~~~1), t (mul t x))
   ::    +abs:  @rq -> @rq
@@ -2819,7 +2837,7 @@
   ++  pow-n
     |=  [x=@rq n=@rq]  ^-  @rq
     ?:  =(n .~~~0)  .~~~1
-    ?>  &((gth n .~~~0) (isint n))
+    ?>  &((gth n .~~~0) (is-int n))
     =/  p  x
     |-  ^-  @rq
     ?:  (lth n .~~~2)
@@ -2858,6 +2876,24 @@
     =/  term3  (mul (add z .~~~1) (add z .~~~1))
     =/  term  (mul term1 (pow-n (div term2 term3) i))
     $(i (add i .~~~1), p (add p term), po p)
+  ::    +log-10:  @rq -> @rq
+  ::
+  ::  Returns the base-10 logarithm of a floating-point atom.
+  ::    Examples
+  ::      TODO
+  ::  Source
+  ++  log-10
+    |=  z=@rq  ^-  @rq
+    (div (log z) log10)
+  ::    +log-2:  @rq -> @rq
+  ::
+  ::  Returns the base-2 logarithm of a floating-point atom.
+  ::    Examples
+  ::      TODO
+  ::  Source
+  ++  log-2
+    |=  z=@rq  ^-  @rq
+    (div (log z) log2)
   ::    +pow:  [@rq @rq] -> @rq
   ::
   ::  Returns the power of a floating-point atom to a floating-point exponent.
