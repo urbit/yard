@@ -1,8 +1,7 @@
-  ::  /lib/etch.hoon
+::  /lib/etch.hoon
 ::::  ~littel-wolfur, simplified by ~litlep-nibbyt
 ::    Version ~2023.6.18
 ::
-/+  *mip
 |%
 ::
 ++  show-json
@@ -23,10 +22,10 @@
     =/  hed=json  $(typ p.typ, arg -.arg)
     =/  tal=json  $(typ q.typ, arg +.arg)
     ::
-    ?:  ?&  !!?=([%o ^] hed)
-            !!?=([%o ^] tal)
+    ?:  ?&  ?=([%o *] hed)
+            ?=([%o *] tal)
         ==
-      [%o (~(uni by ?>(?=(%o -.hed) p.hed)) ?>(?=(%o -.tal) p.tal))]
+      [%o (~(uni by p.hed) p.tal)]
     ::
     ?~  hed  tal
     ?:  &(?=([%s @t] hed) ?=([%s @t] tal))
@@ -179,4 +178,4 @@
      %ui  [%n `@t`(rsh [3 2] (scot %ui dat))]
      %ud  [%n (scot %ud dat)]
   ==
-  --
+--
