@@ -162,35 +162,35 @@
     !>  %.n
     !>  (neq:rs:math .1 .1)
   ==
-++  test-rs-isclose
+++  test-rs-is-close
   ;:  weld
   %+  expect-eq
     !>  %.y
-    !>  (isclose:rs:math .1 .1)
+    !>  (is-close:rs:math .1 .1)
   %+  expect-eq
     !>  %.n
-    !>  (isclose:rs:math .1 .1.1)
+    !>  (is-close:rs:math .1 .1.1)
   ==
-++  test-rs-allclose
+++  test-rs-all-close
   ;:  weld
   %+  expect-eq
     !>  %.n
-    !>  (~(allclose rs:math [%z .1e-8]) .1 ~[.1 .1.000001])
+    !>  (~(all-close rs:math [%z .1e-8]) .1 ~[.1 .1.000001])
   %+  expect-eq
     !>  %.n
-    !>  (~(allclose rs:math [%z .1e-8]) .1 ~[.1 .1.000001])
+    !>  (~(all-close rs:math [%z .1e-8]) .1 ~[.1 .1.000001])
   %+  expect-eq
     !>  %.y
-    !>  (allclose:rs:math .1 ~[.1])
+    !>  (all-close:rs:math .1 ~[.1])
   ==
-++  test-rs-isint
+++  test-rs-is-int
   ;:  weld
   %+  expect-eq
     !>  %.y
-    !>  (isint:rs:math .1)
+    !>  (is-int:rs:math .1)
   %+  expect-eq
     !>  %.n
-    !>  (isint:rs:math .1.1)
+    !>  (is-int:rs:math .1.1)
   ==
 ++  test-rs-add
   ;:  weld
