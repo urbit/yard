@@ -2451,7 +2451,7 @@
 ++  test-shuffle-3
   %+  expect-eq
     !>  `(list @)`~[3 2 1]
-    !>  (shuffle `(list @)`~[1 2 3 4 5] 42)
+    !>  (shuffle `(list @)`~[1 2 3] 42)
 ++  test-shuffle-5
   %+  expect-eq
     !>  `(list @)`~[2 3 5 4 1]
@@ -2497,4 +2497,3 @@
     !>  (draw-n-with-replacement (gulf 1 100) 10 42)
   ==
 --
-
